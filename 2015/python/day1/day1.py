@@ -1,9 +1,19 @@
+def part1(data):
+    floor = 0
+    for movement in data:
+        floor = floor + 1 if movement == "(" else floor - 1
+
+    print(floor)
+
+def part2(data):
+    floor = 0
+    for index, movement in list(enumerate(data)):
+        floor = floor + 1 if movement == "(" else floor - 1
+        if (floor == -1):
+            print(index + 1)
+            return
+
 f = open("input.txt", "r")
 
 data = f.read()
-
-floor = 0
-for movement in data:
-    floor = floor + 1 if movement == "(" else floor - 1
-
-print(floor)
+part2(data)
