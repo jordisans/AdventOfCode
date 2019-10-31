@@ -1,4 +1,5 @@
 def part1(data):
+    print("Part 1")
     floor = 0
     for movement in data:
         floor = floor + 1 if movement == "(" else floor - 1
@@ -6,6 +7,7 @@ def part1(data):
     print(floor)
 
 def part2(data):
+    print("Part 2")
     floor = 0
     for index, movement in enumerate(data):
         floor = floor + 1 if movement == "(" else floor - 1
