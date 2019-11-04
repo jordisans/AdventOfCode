@@ -21,6 +21,22 @@ def part1(data):
 
     print(len(houses))
 
+def moveSanta(move, x, y, houses):
+    if move == "^":
+        y -= 1
+    elif move == "v":
+        y += 1
+    elif move == "<":
+        x -= 1
+    else:
+        x += 1
+    location = (x, y)
+    if location not in houses:
+        houses[location] = 1
+    else:
+        houses[location] += 1
+    return x, y
+
 def part2(data):
     print("Part 2")
     santaX = 0
@@ -31,34 +47,10 @@ def part2(data):
     santasTurn = True
     for move in data:
         if santasTurn:
-            if move == "^":
-                santaY -= 1
-            elif move == "v":
-                santaY += 1
-            elif move == "<":
-                santaX -= 1
-            else:
-                santaX += 1
-            location = (santaX, santaY)
-            if location not in houses:
-                houses[location] = 1
-            else:
-                houses[location] += 1
+            santaX, santaY = moveSanta(move, santaX, santaY, houses)
             santasTurn = False
         else:
-            if move == "^":
-                roboSantaY -= 1
-            elif move == "v":
-                roboSantaY += 1
-            elif move == "<":
-                roboSantaX -= 1
-            else:
-                roboSantaX += 1
-            location = (roboSantaX, roboSantaY)
-            if location not in houses:
-                houses[location] = 1
-            else:
-                houses[location] += 1
+            roboSantaX, roboSantaY = moveSanta(move, roboSantaX, roboSantaY, houses)
             santasTurn = True
     print(len(houses))
 
