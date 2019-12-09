@@ -1,31 +1,51 @@
-with open("input.txt", "r") as file:
+def GetWiresCoordinates(wireDescription):
     x, y = 0, 0
-    frontPanel = { (x, y): 0 }
-    minDistance = 9999
-    wireId = 0
-    for wirePath in file:
-        x, y = 0, 0
-        wireSteps = wirePath.strip().split(",")
-        for wireStepDefinition in wireSteps:
-            direction = wireStepDefinition[0] 
-            distance = int(wireStepDefinition[1:])
-            for _ in range(0, distance):
-                if direction == "U":
-                    x += 1
-                elif direction == "D":
-                    x -= 1
-                elif direction == "R":
-                    y += 1
-                else:
-                    y -= 1
-            
-                if  (x, y) in frontPanel and frontPanel[(x, y)] != wireId and (x, y) != (0, 0):
-                    frontPanel[(x, y)] = "X"
-                    distance = abs(x) + abs(y)
-                    if distance < minDistance:
-                        minDistance = distance
-                else:
-                    frontPanel[(x, y)] = wireId
-        wireId += 1
+    wireCoordinates = [(x,y)]
+    for wireStep in wireDescription:
+        direction = wireStep[0]
+        distance = int(wireStep[1:])
+        for _ in range(0, distance):
+            if direction == "U":
+                x += 1
+            elif direction == "D":
+                x -= 1
+            elif direction == "R":
+                y += 1
+            else:
+                y -= 1
+            wireCoordinates.append((x, y))
+    return wireCoordinates
 
+def GetFrontPanelLayout():
+    with open("input.txt", "r") as f:
+        firstWire = f.readline().strip().split(",")
+        secondWire = f.readline().strip().split(",")
+
+        firstWireCoordinates =  GetWiresCoordinates(firstWire)
+        secondWireCoordinates = GetWiresCoordinates(secondWire)
+        intersections =  set(firstWireCoordinates) & set(secondWireCoordinates)
+        intersections.remove((0,0))
+
+        return firstWireCoordinates, secondWireCoordinates, intersections
+
+def part1():
+    _, _, intersections = GetFrontPanelLayout()
+    minDistance = 9999
+
+    for intersection in intersections:
+        distance = abs(intersection[0]) + abs(intersection[1])
+        if distance < minDistance:
+            minDistance = distance
     print(minDistance)
+
+def part2():
+    firstWireCoordinates, secondWireCoordinates, intersections = GetFrontPanelLayout()
+    minSteps = 999999
+    for intersection in intersections:
+        stepsUntilIntersection = firstWireCoordinates.index(intersection) + secondWireCoordinates.index(intersection)
+        if stepsUntilIntersection < minSteps:
+            minSteps = stepsUntilIntersection
+    print(minSteps)
+
+part1()
+part2()
