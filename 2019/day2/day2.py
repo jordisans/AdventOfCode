@@ -1,4 +1,4 @@
-def intCodeComputer(noun, verb, initialMemoryState):
+def IntCodeComputer(noun, verb, initialMemoryState):
     intCodeProgram = initialMemoryState.copy()
     intCodeProgram[1] = noun
     intCodeProgram[2] = verb
@@ -26,28 +26,28 @@ def intCodeComputer(noun, verb, initialMemoryState):
             print(f"Invalid opcode {opCode}")
     return intCodeProgram[0]
 
-def getIntCodeProgramFromFile():
+def GetIntCodeProgramFromFile():
     f = open("input.txt", "r")
     _input = f.read().strip()
     intCodeProgram = list(map(lambda x: int(x), _input.split(",")))
     return intCodeProgram
 
-def part1():
-    intCodeProgram = getIntCodeProgramFromFile()
-    output = intCodeComputer(12, 2, intCodeProgram)
+def Part1():
+    intCodeProgram = GetIntCodeProgramFromFile()
+    output = IntCodeComputer(12, 2, intCodeProgram)
     print(output)
 
-def part2():
-    intCodeProgram = getIntCodeProgramFromFile()
+def Part2():
+    intCodeProgram = GetIntCodeProgramFromFile()
     for noun in range(0, 100):
         for verb in range(0, 100):
             print(f"Noun {noun} Verb {verb}")
-            output = intCodeComputer(noun, verb, intCodeProgram)
+            output = IntCodeComputer(noun, verb, intCodeProgram)
             if output == 19690720:
                 print("Output found")
                 print(f"Result {100 * noun + verb}")
                 return
 
 
-part1()
-part2()
+Part1()
+Part2()

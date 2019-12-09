@@ -28,7 +28,7 @@ def GetFrontPanelLayout():
 
         return firstWireCoordinates, secondWireCoordinates, intersections
 
-def part1():
+def Part1():
     _, _, intersections = GetFrontPanelLayout()
     minDistance = 9999
 
@@ -38,7 +38,7 @@ def part1():
             minDistance = distance
     print(minDistance)
 
-def part2():
+def Part2():
     firstWireCoordinates, secondWireCoordinates, intersections = GetFrontPanelLayout()
     minSteps = 999999
     for intersection in intersections:
@@ -47,5 +47,5 @@ def part2():
             minSteps = stepsUntilIntersection
     print(minSteps)
 
-part1()
-part2()
+Part1()
+Part2()

@@ -1,6 +1,6 @@
 import math
 
-def part1():
+def Part1():
     print("Part 1")
     with open("input.txt", "r") as f:
         fuelNeeded = 0
@@ -8,7 +8,7 @@ def part1():
             fuelNeeded += math.trunc(int(moduleMass) / 3) - 2
         print(fuelNeeded)
 
-def part2():
+def Part2():
     print("Part 2")
     with open("input.txt", "r") as f:
         fuelNeeded = 0
@@ -19,5 +19,5 @@ def part2():
                 fuelForModule = math.trunc(fuelForModule / 3) - 2
         print(fuelNeeded)
 
-part1()
-part2()
+Part1()
+Part2()
